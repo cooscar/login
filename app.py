@@ -70,5 +70,8 @@ def login():
         flash("Error: Incorrect password.", "error")
         return redirect("/page2")  
 
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=True)
+    port = int(os.getenv("PORT", 8080))
+    print(f"App is running on port {port}")  
+    app.run(host="0.0.0.0", port=port, debug=True)
