@@ -19,6 +19,11 @@ def page2():
     return render_template("page2.html")
 
 
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))  
+    app.run(host="0.0.0.0", port=port, debug=True)
+
+
 @app.route("/submit", methods=["POST"])
 def submit():
     name = request.form.get("email")
