@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, flash, redirect
 import os
 
+
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
 
@@ -11,12 +12,17 @@ if not os.path.exists("submissions"):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("register.html")
 
 
 @app.route("/page2")
 def page2():
     return render_template("page2.html")
+
+@app.route("/index")
+def index():
+    return render_template("index.html")
+
 
 @app.route("/submit", methods=["POST"])
 def submit():
@@ -25,20 +31,20 @@ def submit():
 
     if not name:
         flash("Error: email cannot be empty.", "error")
-        return redirect("/")
+        return redirect("/index")
 
     filename = f"submissions/{name}.txt"
 
     if os.path.exists(filename):
         flash("Error: email already in use. Please choose another one.", "error")
-        return redirect("/")
+        return redirect("/index")
 
     with open(filename, "w") as file:
         file.write(f"Name: {name}\n")
         file.write(f"Password: {password}\n")
 
     flash("Sign-up submitted successfully!", "success")
-    return redirect("/")
+    return redirect("/index")
 
 
 @app.route("/login", methods=["POST"])
@@ -59,13 +65,10 @@ def login():
 
     if name == stored_name and password == stored_password:
         flash("Login successful!", "success")
-        return redirect("/")  
+        return redirect("/index")  
     else:
         flash("Error: Incorrect password.", "error")
         return redirect("/page2")  
 
 if __name__ == "__main__":
-    # Use the dynamic port Railway assigns or fallback to 8080
-    port = int(os.getenv("PORT", 8080))
-    print(f"App is running on port {port}")  # Log to console to confirm the port
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
