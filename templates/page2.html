@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="/"><button type="submit">HOME</button></a>
         <h2>Login</h2>
 
         {% with messages = get_flashed_messages(with_categories=True) %}
@@ -28,7 +29,7 @@
             <button type="submit">Log in</button>
         </form>
 
-        <a href="/"><button type="button">Don't have an account? Sign up</button></a>
+        <a href="/index"><button type="button">Don't have an account? Sign up</button></a>
     </div>
 </body>
 </html>
