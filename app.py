@@ -65,7 +65,7 @@ def login():
         return redirect("/page2")  
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8080)) 
-    print(f"App is running on port {port}")  
+    # Use the dynamic port Railway assigns or fallback to 8080
+    port = int(os.getenv("PORT", 8080))
+    print(f"App is running on port {port}")  # Log to console to confirm the port
     app.run(host="0.0.0.0", port=port, debug=True)
-
